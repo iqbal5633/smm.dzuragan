@@ -35,7 +35,7 @@ const dana = {
   nama: "SALMA"
 };
 
-const qris = "https://i.ibb.co.com/274TzTgB/IMG-20260428-225830.jpg";
+const qris = "https://i.ibb.co.com/7dwRjNR4/IMG-20260428-225830.jpg";
 
 // FORMAT
 const rupiah = n => isNaN(n) ? "0" : Number(n).toLocaleString("id-ID");
