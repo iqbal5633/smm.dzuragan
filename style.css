@@ -1,3 +1,6 @@
+/* =======================
+   GLOBAL
+======================= */
 *{
   margin:0;
   padding:0;
@@ -11,98 +14,139 @@ body{
   overflow-x:hidden;
 }
 
-/* GLOW BACKGROUND */
-body::before{
-  content:"";
+/* =======================
+   LOADER
+======================= */
+#loader{
   position:fixed;
-  width:500px;
-  height:500px;
-  background:#22c55e;
-  filter:blur(160px);
-  top:-150px;
-  left:-150px;
-  opacity:0.25;
-  animation: float 8s infinite alternate ease-in-out;
-  z-index:-1;
+  inset:0;
+  background:#020617;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-@keyframes float{
-  from{transform:translate(0,0) scale(1);}
-  to{transform:translate(200px,120px) scale(1.2);}
+.loader-box{
+  text-align:center;
+  color:#22c55e;
 }
 
-/* NAV */
+.spinner{
+  width:60px;
+  height:60px;
+  border:4px solid rgba(255,255,255,0.1);
+  border-top:4px solid #22c55e;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+body.loaded #loader{
+  opacity:0;
+  visibility:hidden;
+}
+
+#loadingText{
+  margin-top:10px;
+  font-size:14px;
+  animation:blink .7s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0.4;}
+}
+
+/* =======================
+   NAV
+======================= */
 .nav{
   text-align:center;
   padding:15px;
   background:rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
 }
 
-.nav h2{
-  color:#22c55e;
-  text-shadow:0 0 10px #22c55e;
-  letter-spacing:2px;
-}
-
-/* HERO */
+/* =======================
+   HERO PREMIUM
+======================= */
 .hero{
   text-align:center;
-  padding:35px 20px;
+  padding:35px 18px;
+  position:relative;
 }
 
+/* TITLE */
 .hero h1{
-  font-size:20px;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:1px;
+
   background:linear-gradient(90deg,#22c55e,#38bdf8,#a78bfa);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation: glowText 3s infinite alternate;
+
+  animation: glowText 3s ease-in-out infinite alternate;
 }
 
+/* SUBTITLE 1 */
 .hero p{
-  margin-top:8px;
-  opacity:0.7;
+  margin-top:10px;
   font-size:13px;
+  opacity:0.8;
+  color:#cbd5e1;
+  line-height:1.5;
 }
 
+/* tambahan subtitle styling biar beda level */
+.hero p:nth-of-type(1){
+  margin-top:8px;
+}
+
+/* glow animation */
 @keyframes glowText{
-  from{filter:brightness(1);}
-  to{filter:brightness(1.3);}
+  0%{
+    filter:brightness(1);
+    transform:translateY(0px);
+  }
+  100%{
+    filter:brightness(1.2);
+    transform:translateY(-2px);
+  }
 }
 
-/* ORDER CARD */
-.order{
-  display:flex;
-  justify-content:center;
-  padding:10px;
+/* decorative glow background */
+.hero::before{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:#22c55e;
+  filter:blur(120px);
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  opacity:0.15;
+  z-index:-1;
 }
-
+/* =======================di
+   CARD
+======================= */
 .card{
   width:92%;
   max-width:420px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter: blur(14px);
+  margin:auto;
   padding:20px;
-  border-radius:15px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 0 25px rgba(34,197,94,0.15);
-  animation: fadeIn 1s ease;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* FORM */
-label{
-  display:block;
-  margin-top:12px;
-  font-size:12px;
-  opacity:0.8;
-}
-
+/* INPUT */
 input,select{
   width:100%;
   padding:11px;
@@ -111,193 +155,144 @@ input,select{
   border-radius:10px;
   background:#0f172a;
   color:#fff;
-  outline:none;
-  transition:0.2s;
 }
 
-input:focus,select:focus{
-  box-shadow:0 0 10px #22c55e;
-}
-
-/* INFO BOX */
+/* =======================
+   INFO BOX (UPGRADE)
+======================= */
 .info{
-  margin-top:12px;
-  font-size:13px;
-  padding:12px;
-  background:#020617;
-  border-left:3px solid #22c55e;
-  border-radius:10px;
-  line-height:1.5;
-  opacity:0.9;
+  margin-top:14px;
+  padding:14px;
+  border-radius:14px;
+
+  background:linear-gradient(145deg,rgba(34,197,94,0.08),rgba(15,23,42,0.9));
+  border:1px solid rgba(34,197,94,0.25);
+
+  font-size:12.5px;
+  line-height:1.6;
+  color:#e5e7eb;
+
+  box-shadow:0 0 20px rgba(34,197,94,0.08);
+  position:relative;
+  overflow:hidden;
 }
 
-/* TOTAL */
+/* glow line animasi */
+.info::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-50%;
+  width:200%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#22c55e,transparent);
+  animation:slide 3s linear infinite;
+}
+
+@keyframes slide{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(50%);}
+}
+
+/* =======================
+   SUMMARY
+======================= */
 .summary{
-  margin-top:15px;
   text-align:center;
-  font-size:18px;
+  margin:15px 0;
   color:#22c55e;
   font-weight:bold;
 }
 
-/* BUTTON */
+/* =======================
+   BUTTON
+======================= */
 button{
   width:100%;
-  margin-top:15px;
   padding:12px;
-  background:linear-gradient(90deg,#22c55e,#16a34a);
   border:none;
   border-radius:12px;
-  font-weight:bold;
+  background:linear-gradient(90deg,#22c55e,#16a34a);
   color:#fff;
+  font-weight:bold;
   cursor:pointer;
   transition:0.2s;
 }
 
 button:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 15px #22c55e;
+  transform:scale(1.02);
 }
 
-/* MODAL */
+/* =======================
+   MODAL
+======================= */
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.75);
   justify-content:center;
   align-items:center;
-  z-index:10;
 }
 
 .modal-box{
   background:#fff;
   color:#000;
   padding:20px;
-  border-radius:15px;
+  border-radius:16px;
   width:90%;
-  max-width:340px;
+  max-width:360px;
   text-align:center;
-  animation: pop 0.3s ease;
-}
-
-@keyframes pop{
-  from{transform:scale(0.8); opacity:0;}
-  to{transform:scale(1); opacity:1;}
 }
 
 /* PAYMENT */
 .pay-box{
   display:flex;
   gap:10px;
-  margin-top:15px;
+  margin-top:12px;
 }
 
 .pay-box button{
   flex:1;
-  padding:10px;
-  border:none;
-  border-radius:8px;
   background:#1f2937;
   color:#fff;
+  border-radius:10px;
+}
+
+.pay-box button.active{
+  background:#22c55e;
+  color:#000;
+}
+
+#paymentInfo{
+  margin-top:12px;
+  padding:12px;
+  background:#0f172a;
+  color:#fff;
+  border-radius:10px;
 }
 
 /* QRIS */
 #qrisImg{
   margin-top:12px;
+  width:100%;
+  max-width:220px;
+  border-radius:12px;
 }
 
-/* NOTIF */
+/* LIVE NOTIF */
 .live-notif{
   position:fixed;
   bottom:20px;
   left:50%;
   transform:translateX(-50%);
-  background:#020617;
+  background:#111;
   padding:10px 15px;
   border-radius:10px;
-  font-size:13px;
   opacity:0;
-  transition:0.3s;
-  border:1px solid rgba(255,255,255,0.1);
+  transition:.3s;
 }
 
-/* TESTIMONI */
-.testimoni{
-  padding:40px 20px;
-  text-align:center;
-  background:#0f172a;
-  margin-top:40px;
-}
-
-.testimoni h2{
-  font-size:28px;
-}
-
-.testimoni .sub{
-  font-size:13px;
-  opacity:0.7;
-}
-
-.admin-box{
-  margin:15px 0;
-}
-
-.admin-box input{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  width:220px;
-  text-align:center;
-}
-
-.upload-box{
-  margin-bottom:20px;
-}
-
-.upload-box input{
-  padding:10px;
-  background:#1e293b;
-  color:#fff;
-  border-radius:8px;
-}
-
-.upload-box button{
-  padding:10px 15px;
-  background:#22c55e;
-  border:none;
-  color:#fff;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* GRID TESTIMONI */
-.testi-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-
-.testi-card{
-  background:#1e293b;
-  padding:10px;
-  border-radius:12px;
-  position:relative;
-}
-
-.testi-card img{
-  width:100%;
-  border-radius:10px;
-}
-
-/* DELETE BTN */
-.del-btn{
-  position:absolute;
-  top:5px;
-  right:5px;
-  background:red;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  }
+.live-notif.show{
+  opacity:1;
+                             }
