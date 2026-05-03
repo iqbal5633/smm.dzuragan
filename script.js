@@ -186,3 +186,74 @@ function renderTestimoni() {
     grid.appendChild(card);
   });
 }
+
+
+const ADMIN_PASS = "18102010"; // <-- ganti password kamu di sini
+
+document.addEventListener("DOMContentLoaded", renderTestimoni);
+
+function addTestimoni() {
+  const pass = document.getElementById("adminPass").value;
+  if (pass !== ADMIN_PASS) {
+    alert("Katasandi salah!");
+    return;
+  }
+
+  const input = document.getElementById("uploadTesti");
+  const file = input.files[0];
+
+  if (!file) {
+    alert("Pilih foto dulu!");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+
+    data.push(e.target.result);
+
+    localStorage.setItem("testimoniData", JSON.stringify(data));
+
+    renderTestimoni();
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function renderTestimoni() {
+  const grid = document.getElementById("testiGrid");
+  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+
+  grid.innerHTML = "";
+
+  data.forEach((img, index) => {
+    const card = document.createElement("div");
+    card.className = "testi-card";
+
+    card.innerHTML = `
+      <button class="del-btn" onclick="hapusTesti(${index})">X</button>
+      <img src="${img}">
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function hapusTesti(index) {
+  const pass = prompt("Masukkan password untuk hapus:");
+
+  if (pass !== ADMIN_PASS) {
+    alert("Password salah!");
+    return;
+  }
+
+  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+
+  data.splice(index, 1);
+
+  localStorage.setItem("testimoniData", JSON.stringify(data));
+
+  renderTestimoni();
+  }
