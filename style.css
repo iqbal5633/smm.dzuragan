@@ -2,7 +2,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family:'Segoe UI', sans-serif;
 }
 
 body{
@@ -11,7 +11,7 @@ body{
   overflow-x:hidden;
 }
 
-/* GLOW BACKGROUND ANIMATION */
+/* GLOW BACKGROUND */
 body::before{
   content:"";
   position:fixed;
@@ -71,7 +71,7 @@ body::before{
   to{filter:brightness(1.3);}
 }
 
-/* CARD */
+/* ORDER CARD */
 .order{
   display:flex;
   justify-content:center;
@@ -95,7 +95,7 @@ body::before{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* LABEL */
+/* FORM */
 label{
   display:block;
   margin-top:12px;
@@ -103,7 +103,6 @@ label{
   opacity:0.8;
 }
 
-/* INPUT */
 input,select{
   width:100%;
   padding:11px;
@@ -132,7 +131,7 @@ input:focus,select:focus{
   opacity:0.9;
 }
 
-/* SUMMARY */
+/* TOTAL */
 .summary{
   margin-top:15px;
   text-align:center;
@@ -187,8 +186,29 @@ button:hover{
   to{transform:scale(1); opacity:1;}
 }
 
+/* PAYMENT */
+.pay-box{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.pay-box button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#1f2937;
+  color:#fff;
+}
+
+/* QRIS */
+#qrisImg{
+  margin-top:12px;
+}
+
 /* NOTIF */
-.notif{
+.live-notif{
   position:fixed;
   bottom:20px;
   left:50%;
@@ -202,108 +222,82 @@ button:hover{
   border:1px solid rgba(255,255,255,0.1);
 }
 
-.notif.show{
-  opacity:1;
+/* TESTIMONI */
+.testimoni{
+  padding:40px 20px;
+  text-align:center;
+  background:#0f172a;
+  margin-top:40px;
 }
 
-/* PAYMENT BOX SPACING FIX */
-.pay-box{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
+.testimoni h2{
+  font-size:28px;
 }
 
-/* tombol DANA / QRIS */
-.pay-box button{
-  flex:1;
+.testimoni .sub{
+  font-size:13px;
+  opacity:0.7;
+}
+
+.admin-box{
+  margin:15px 0;
+}
+
+.admin-box input{
   padding:10px;
+  border-radius:8px;
   border:none;
+  width:220px;
+  text-align:center;
+}
+
+.upload-box{
+  margin-bottom:20px;
+}
+
+.upload-box input{
+  padding:10px;
+  background:#1e293b;
+  color:#fff;
+  border-radius:8px;
+}
+
+.upload-box button{
+  padding:10px 15px;
+  background:#22c55e;
+  border:none;
+  color:#fff;
   border-radius:8px;
   cursor:pointer;
-  background:#1f2937;
-  color:#fff;
 }
 
-/* teks payment (DANA / QRIS info) */
-#paymentInfo{
-  margin-top:12px;
+/* GRID TESTIMONI */
+.testi-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.testi-card{
+  background:#1e293b;
   padding:10px;
-  background:#f3f4f6;
+  border-radius:12px;
+  position:relative;
+}
+
+.testi-card img{
+  width:100%;
   border-radius:10px;
-  line-height:1.6;
-  font-size:13px;
 }
 
-/* gambar QRIS juga dikasih jarak */
-#qrisImg{
-  margin-top:12px;
+/* DELETE BTN */
+.del-btn{
+  position:absolute;
+  top:5px;
+  right:5px;
+  background:red;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
 }
-
-.testimoni {
-  padding: 40px 20px;
-  text-align: center;
-  background: #0f172a;
-  color: white;
-}
-
-.testimoni h2 {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
-
-.testimoni .sub {
-  font-size: 14px;
-  opacity: 0.7;
-  margin-bottom: 20px;
-}
-
-.upload-box {
-  margin-bottom: 20px;
-}
-
-.upload-box input {
-  padding: 10px;
-  background: #1e293b;
-  border-radius: 8px;
-  color: white;
-  border: none;
-}
-
-.upload-box button {
-  padding: 10px 15px;
-  margin-left: 10px;
-  background: #22c55e;
-  border: none;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.upload-box button:hover {
-  background: #16a34a;
-}
-
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.testi-card {
-  background: #1e293b;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transition: 0.3s;
-}
-
-.testi-card:hover {
-  transform: scale(1.03);
-}
-
-.testi-card img {
-  width: 100%;
-  border-radius: 10px;
-  object-fit: cover;
-  }
