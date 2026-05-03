@@ -238,3 +238,72 @@ button:hover{
 #qrisImg{
   margin-top:12px;
 }
+
+.testimoni {
+  padding: 40px 20px;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+}
+
+.testimoni h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.testimoni .sub {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  margin-bottom: 20px;
+}
+
+.upload-box input {
+  padding: 10px;
+  background: #1e293b;
+  border-radius: 8px;
+  color: white;
+  border: none;
+}
+
+.upload-box button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  background: #22c55e;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.upload-box button:hover {
+  background: #16a34a;
+}
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.testi-card {
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.testi-card:hover {
+  transform: scale(1.03);
+}
+
+.testi-card img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  }
