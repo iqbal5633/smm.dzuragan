@@ -136,3 +136,53 @@ A/N: ${dana.nama}`;
 };
 
 updateHarga();
+
+
+// LOAD SAAT WEBSITE DIBUKA
+document.addEventListener("DOMContentLoaded", loadTestimoni);
+
+function addTestimoni() {
+  const input = document.getElementById("uploadTesti");
+  const file = input.files[0];
+
+  if (!file) {
+    alert("Pilih foto dulu!");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+
+    data.push(e.target.result);
+
+    localStorage.setItem("testimoniData", JSON.stringify(data));
+
+    renderTestimoni();
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function loadTestimoni() {
+  renderTestimoni();
+}
+
+function renderTestimoni() {
+  const grid = document.getElementById("testiGrid");
+  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+
+  grid.innerHTML = "";
+
+  data.forEach(img => {
+    const card = document.createElement("div");
+    card.className = "testi-card";
+
+    card.innerHTML = `
+      <img src="${img}" alt="testimoni">
+    `;
+
+    grid.appendChild(card);
+  });
+}
