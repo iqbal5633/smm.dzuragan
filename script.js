@@ -1,3 +1,6 @@
+/* =======================
+   ELEMENT
+======================= */
 const service = document.getElementById("service");
 const qty = document.getElementById("qty");
 const total = document.getElementById("total");
@@ -15,11 +18,13 @@ const qrisImg = document.getElementById("qrisImg");
 
 const sendWA = document.getElementById("sendWA");
 
-const nomorWA = "6281271617785";
+const notif = document.querySelector(".live-notif");
 
 let metode = "DANA";
 
-// DATA SERVICE
+/* =======================
+   DATA SERVICE
+======================= */
 const data = {
   followers_ig: { name: "Instagram Followers", price: 10000 },
   views_tiktok: { name: "TikTok Views", price: 5000 },
@@ -29,7 +34,6 @@ const data = {
   views_tt: { name: "TikTok Views", price: 4000 }
 };
 
-// PAYMENT
 const dana = {
   nomor: "088242668174",
   nama: "SALMA"
@@ -37,54 +41,60 @@ const dana = {
 
 const qris = "https://i.ibb.co.com/7dwRjNR4/IMG-20260428-225830.jpg";
 
-// FORMAT
-const rupiah = n => isNaN(n) ? "0" : Number(n).toLocaleString("id-ID");
+/* =======================
+   FORMAT RUPIAH
+======================= */
+const rupiah = n => Number(n).toLocaleString("id-ID");
 
-// HITUNG
+/* =======================
+   HITUNG HARGA
+======================= */
 function updateHarga() {
   const key = service.value;
   const q = parseInt(qty.value);
   
-  if (!data[key] || isNaN(q) || q < 1) {
+  if (!data[key] || isNaN(q)) {
     total.innerText = "Rp 0";
     return;
   }
   
-  const hasil = (q / 1000) * data[key].price;
-  total.innerText = "Rp " + rupiah(Math.round(hasil));
+  const h = (q / 1000) * data[key].price;
+  total.innerText = "Rp " + rupiah(Math.round(h));
 }
 
-service.addEventListener("change", updateHarga);
-qty.addEventListener("input", updateHarga);
+service.onchange = updateHarga;
+qty.oninput = updateHarga;
 
-// ORDER
-document.getElementById("orderBtn").addEventListener("click", () => {
-  
+/* =======================
+   ORDER CLICK
+======================= */
+document.getElementById("orderBtn").onclick = () => {
   const key = service.value;
   const user = target.value.trim();
   const q = parseInt(qty.value);
   
-  if (!data[key]) return alert("Service error");
   if (user.length < 3) return alert("Username tidak valid");
-  if (isNaN(q) || q < 100) return alert("Minimal 100");
+  if (q < 100) return alert("Minimal 100");
   
   const h = (q / 1000) * data[key].price;
   
   modal.style.display = "flex";
   
-  detail.innerText =
-    `${data[key].name}
+  detail.innerText = `
+${data[key].name}
 Target: ${user}
-Jumlah: ${q}`;
+Jumlah: ${q}
+`;
   
   harga.innerText = "Rp " + rupiah(Math.round(h));
   
   setPayment("DANA");
-});
+};
 
-// SET PAYMENT
+/* =======================
+   PAYMENT
+======================= */
 function setPayment(type) {
-  
   metode = type;
   
   btnDana.classList.remove("active");
@@ -93,7 +103,7 @@ function setPayment(type) {
   if (type === "DANA") {
     btnDana.classList.add("active");
     paymentInfo.innerHTML = `
-DANA: ${dana.nomor}<br>
+DANA: ${dana.nomor}
 A/N: ${dana.nama}`;
     qrisImg.style.display = "none";
   }
@@ -106,154 +116,83 @@ A/N: ${dana.nama}`;
   }
 }
 
-// BUTTON EVENT
 btnDana.onclick = () => setPayment("DANA");
 btnQris.onclick = () => setPayment("QRIS");
 
-// CLOSE MODAL
-modal.onclick = (e) => {
+/* =======================
+   CLOSE MODAL
+======================= */
+modal.onclick = e => {
   if (e.target === modal) modal.style.display = "none";
 };
 
-// WA
+/* =======================
+   WHATSAPP
+======================= */
 sendWA.onclick = () => {
-  
   const key = service.value;
   
-  const text =
-    `HALO ADMIN SAYA SUDAH MELAKUKAN PROSES PEMBAYARAN SILAHKAN TINDAK LANJUTI 
+  const text = `ORDER BARU
 
 Layanan: ${data[key].name}
 Target: ${target.value}
 Jumlah: ${qty.value}
 Total: ${total.innerText}
-Metode: ${metode}
-
-DANA: ${dana.nomor}
-A/N: ${dana.nama}`;
+Metode: ${metode}`;
   
-  window.open("https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(text));
+  window.open("https://wa.me/6281271617785?text=" + encodeURIComponent(text));
 };
 
 updateHarga();
 
+/* =======================
+   LOADER (3 STEP CEPAT)
+======================= */
+window.onload = () => {
+  const t = document.getElementById("loadingText");
+  
+  setTimeout(() => t.innerText = "Loading...", 300);
+  setTimeout(() => t.innerText = "Proses...", 800);
+  setTimeout(() => t.innerText = "Memuat Stock...", 1200);
+  setTimeout(() => document.body.classList.add("loaded"), 1500);
+};
 
-// LOAD SAAT WEBSITE DIBUKA
-document.addEventListener("DOMContentLoaded", loadTestimoni);
+/* =======================
+   FAKE LIVE ORDER (FORMAT BARU)
+   NOMOR → ORDER → HARGA
+======================= */
 
-function addTestimoni() {
-  const input = document.getElementById("uploadTesti");
-  const file = input.files[0];
-
-  if (!file) {
-    alert("Pilih foto dulu!");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
-
-    data.push(e.target.result);
-
-    localStorage.setItem("testimoniData", JSON.stringify(data));
-
-    renderTestimoni();
-  };
-
-  reader.readAsDataURL(file);
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function loadTestimoni() {
-  renderTestimoni();
+function randomNumber() {
+  let num = "08";
+  for (let i = 0; i < 10; i++) {
+    num += Math.floor(Math.random() * 10);
+  }
+  return num;
 }
 
-function renderTestimoni() {
-  const grid = document.getElementById("testiGrid");
-  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
+const layanan = ["Followers IG", "Likes IG", "Views TikTok"];
+const jumlah = [100, 250, 500, 1000, 2000, 5000, 200000 ,4839];
+const hargaFake = [5000, 10000, 15000, 20000, 30000, 50000, 200000 ,2000];
 
-  grid.innerHTML = "";
-
-  data.forEach(img => {
-    const card = document.createElement("div");
-    card.className = "testi-card";
-
-    card.innerHTML = `
-      <img src="${img}" alt="testimoni">
-    `;
-
-    grid.appendChild(card);
-  });
+function showNotif() {
+  const phone = randomNumber();
+  const order = random(layanan);
+  const qtyFake = random(jumlah);
+  const price = random(hargaFake);
+  
+  notif.innerText = `${phone} → ${order} ${qtyFake} → Rp ${price.toLocaleString("id-ID")}`;
+  
+  notif.classList.add("show");
+  
+  setTimeout(() => {
+    notif.classList.remove("show");
+  }, 2200);
 }
 
-
-const ADMIN_PASS = "18102010"; // <-- ganti password kamu di sini
-
-document.addEventListener("DOMContentLoaded", renderTestimoni);
-
-function addTestimoni() {
-  const pass = document.getElementById("adminPass").value;
-  if (pass !== ADMIN_PASS) {
-    alert("Katasandi salah!");
-    return;
-  }
-
-  const input = document.getElementById("uploadTesti");
-  const file = input.files[0];
-
-  if (!file) {
-    alert("Pilih foto dulu!");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
-
-    data.push(e.target.result);
-
-    localStorage.setItem("testimoniData", JSON.stringify(data));
-
-    renderTestimoni();
-  };
-
-  reader.readAsDataURL(file);
-}
-
-function renderTestimoni() {
-  const grid = document.getElementById("testiGrid");
-  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
-
-  grid.innerHTML = "";
-
-  data.forEach((img, index) => {
-    const card = document.createElement("div");
-    card.className = "testi-card";
-
-    card.innerHTML = `
-      <button class="del-btn" onclick="hapusTesti(${index})">X</button>
-      <img src="${img}">
-    `;
-
-    grid.appendChild(card);
-  });
-}
-
-function hapusTesti(index) {
-  const pass = prompt("Masukkan password untuk hapus:");
-
-  if (pass !== ADMIN_PASS) {
-    alert("Password salah!");
-    return;
-  }
-
-  let data = JSON.parse(localStorage.getItem("testimoniData")) || [];
-
-  data.splice(index, 1);
-
-  localStorage.setItem("testimoniData", JSON.stringify(data));
-
-  renderTestimoni();
-  }
+/* lebih natural & tidak spam */
+setInterval(showNotif, 4000);
+setTimeout(showNotif, 1200);
