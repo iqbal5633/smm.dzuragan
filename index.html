@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,36 +15,95 @@
 
 <meta name="author" content="SMM DZURAGAN">
 
-<!-- OPEN GRAPH -->
+<!-- OG -->
 <meta property="og:title" content="SMM DZURAGAN - Followers & Engagement Instan">
 <meta property="og:description" content="Naikkan followers Instagram & TikTok dengan cepat, murah, dan real. Tanpa login, langsung proses otomatis.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://i.ibb.co.com/274TzTgB/IMG-20260428-225830.jpg">
-
-<!-- TWITTER -->
-<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="https://i.ibb.co.com/274TzTgB/IMG-20260428-225830.jpg">
+
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
+<body>
+
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-box">
     <div class="spinner"></div>
-    <p id="loadingText">Loading...</p>
+    <p id="loadingText">Memuat...</p>
   </div>
 </div>
-</div>
-
-<body>
 
 <nav class="nav">
   <h2>SMM DZURAGAN</h2>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <h1>Naikkan Followers & Engagement Anda</h1>
   <p>Proses instan, hasil real, khusus untuk Instagram & TikTok</p>
+</section>
+
+<!-- BOOST SECTION -->
+<section class="boost">
+  <div class="boost-box">
+
+    <h2>Kenapa Harus Suntik Sosmed?</h2>
+
+    <p class="highlight">
+      Akun dengan followers tinggi terlihat lebih terpercaya, lebih mudah viral, dan lebih cepat menghasilkan uang.
+    </p>
+
+    <div class="benefit">
+      <div>🚀 Konten lebih mudah masuk FYP</div>
+      <div>🔥 Meningkatkan kepercayaan calon pembeli</div>
+      <div>💰 Cocok untuk jualan & personal branding</div>
+      <div>📈 Engagement naik tanpa ribet</div>
+    </div>
+
+    <div class="counter-box">
+      <div>
+        <h3 id="userCount">1287</h3>
+        <p>Pengguna Aktif Hari Ini</p>
+      </div>
+
+      <div>
+        <h3 id="orderCount">5421</h3>
+        <p>Total Order Diproses</p>
+      </div>
+    </div>
+
+    <div class="stock-box">
+      ⚡ Stock Tersedia: <b id="stock">12,582</b> slot tersisa hari ini
+    </div>
+
+  </div>
+</section>
+
+<!-- GRAFIK -->
+<section class="growth">
+  <div class="growth-box">
+    <h2>Grafik Pertumbuhan Order</h2>
+    <p class="growth-sub">Data real-time dari sistem kami menunjukkan peningkatan engagement setiap hari.</p>
+    <canvas id="growthChart"></canvas>
+  </div>
+</section>
+
+<!-- SEO EDUKASI -->
+<section class="seo">
+  <div class="seo-box">
+    <h2>Apa Itu Suntik Sosmed?</h2>
+    <p>
+      Suntik sosmed adalah layanan digital untuk meningkatkan jumlah followers, likes, dan views secara cepat pada platform seperti Instagram dan TikTok.
+    </p>
+    <p>
+      Layanan ini membantu meningkatkan kredibilitas akun, mempercepat pertumbuhan audience, serta membuat akun terlihat lebih aktif dan terpercaya.
+    </p>
+  </div>
 </section>
 
 <!-- ORDER -->
@@ -58,6 +118,7 @@
       <option value="followers_tt">Tiktok Followers [ HQ Accounts ]</option>
       <option value="likes_tt">TikTok Likes Server 4</option>
       <option value="views_tt">TikTok Views [ 0-15 Minutes ]</option>
+      <option value="wa_channel">WhatsApp Channel Members [ Real & Active ]</option>
     </select>
 
     <label>Username / Link</label>
@@ -66,25 +127,21 @@
     <label>Jumlah</label>
     <input type="number" id="qty" placeholder="Minimal 100">
 
-<div class="info">
-  
-  ⚡ Instant Process<br>
-  🔒 No Login Required<br>
-  📈 High Quality Services<br>
-  ♻️ Refill Guarantee (selected service)
-  
-  <br><br>
-  
-  ⚠️ Pastikan akun tidak di-private (untuk hasil optimal)
-  
-  <br><br>
-  
-  💳 QRIS support ALL PAYMENT DANA<br>
-  🚀 Jika bayar via DANA → proses langsung<br>
-  ⏳ Pembayaran via metode lain bisa pending max 24 jam<br>
-  
-  
-</div>
+    <div class="info">
+⚡ Instant Process<br>
+🔒 No Login Required<br>
+📈 High Quality Services<br>
+♻️ Refill Guarantee (selected service)<br><br>
+
+⚠️ Pastikan akun tidak di-private (untuk hasil optimal)
+
+<br><br>
+
+💳 QRIS support ALL PAYMENT DANA<br>
+🚀 Jika bayar via DANA → proses langsung<br>
+⏳ Pembayaran via metode lain bisa pending max 24 jam
+    </div>
+
     <div class="summary">
       <p>Total Harga</p>
       <h2 id="total">Rp 0</h2>
@@ -95,40 +152,21 @@
   </div>
 </section>
 
-</section>
-
 <!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-box">
-
     <h2>Pembayaran</h2>
-
     <p id="detail"></p>
     <h3 id="harga"></h3>
-
-    <div class="pay-box">
-      <button id="btnDana">DANA</button>
-      <button id="btnQris">QRIS</button>
-    </div>
-
-    <div id="paymentInfo"></div>
-
-    <p class="note">
-      Silakan lakukan pembayaran, lalu kirim bukti melalui WhatsApp.
-    </p>
-
-    <img id="qrisImg" src="" style="display:none; width:100%; margin-top:10px; border-radius:10px;">
-
+    <img id="qrisImg" src="https://i.ibb.co.com/7dwRjNR4/IMG-20260428-225830.jpg">
+    <p>Silakan lakukan pembayaran, lalu kirim bukti melalui WhatsApp.</p>
     <button id="sendWA">Kirim Bukti</button>
-
   </div>
 </div>
 
-<div id="liveNotif" class="live-notif">
-  <p id="notifText"></p>
-</div>
+<div id="liveNotif" class="live-notif"></div>
 
 <script src="script.js"></script>
 
 </body>
-                    </html>
+                                                     </html>
